@@ -119,12 +119,6 @@ echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >>feeds.conf.de
 echo 'src-git small https://github.com/kenzok8/small' >>feeds.conf.default
 echo 'src-git sundaqiang https://github.com/sundaqiang/openwrt-packages-backup' >>feeds.conf.default
 
-# 隐藏首页显示用户名(by:kokang)
-sed -i 's/name="luci_username" value="<%=duser%>"/name="luci_username"/g' feeds/luci/modules/luci-base/luasrc/view/sysauth.htm
-sed -i 's/name="luci_username" value="<%=duser%>"/name="luci_username"/g' feeds/kenzok8/luci-theme-argonne/luasrc/view/themes/argonne/sysauth.htm
-# 移动光标至第一格(by:kokang)
-sed -i "s/'luci_password'/'luci_username'/g" feeds/luci/modules/luci-base/luasrc/view/sysauth.htm
-sed -i "s/'luci_password'/'luci_username'/g" feeds/kenzok8/luci-theme-argonne/luasrc/view/themes/argonne/sysauth.htm
 
 # Bash
 sed -i "s/\/bin\/ash/\/bin\/bash/" package/base-files/files/etc/passwd >/dev/null 2>&1
