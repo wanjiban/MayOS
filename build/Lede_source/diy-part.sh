@@ -98,3 +98,60 @@ openwrt-x86-64-generic-squashfs-rootfs.img.gz
 sha256sums
 version.buildinfo
 EOF
+
+# ADD by Mayos
+
+# FEEDS
+echo 'src-git kenzo https://github.com/kenzok8/openwrt-packages' >>feeds.conf.default
+echo 'src-git small https://github.com/kenzok8/small' >>feeds.conf.default
+echo 'src-git sundaqiang https://github.com/sundaqiang/openwrt-packages-backup' >>feeds.conf.default
+
+
+# Bash
+sed -i "s/\/bin\/ash/\/bin\/bash/" package/base-files/files/etc/passwd >/dev/null 2>&1
+sed -i "s/\/bin\/ash/\/bin\/bash/" package/base-files/files/usr/libexec/login.sh >/dev/null 2>&1
+
+# SSH open to all
+sed -i '/option Interface/s/^#\?/#/'  package/network/services/dropbear/files/dropbear.config
+
+# OPKG
+#sed -i 's#mirrors.cloud.tencent.com/lede#mirrors.tuna.tsinghua.edu.cn/openwrt#g' package/lean/default-settings/files/zzz-default-settings
+#sed -i 's/x86_64/x86\/64/' /etc/opkg/distfeeds.conf
+#sed -i "/kenzok8/d" /etc/opkg/distfeeds.conf
+sed -i "/exit 0/i sed -i \"\/kenzo\/d\" \/etc\/opkg\/distfeeds.conf"        "${ZZZ_PATH}"
+sed -i "/exit 0/i sed -i \"\/small\/d\" \/etc\/opkg\/distfeeds.conf"        "${ZZZ_PATH}"
+sed -i "/exit 0/i sed -i \"\/passwall\/d\" \/etc\/opkg\/distfeeds.conf"     "${ZZZ_PATH}"
+sed -i "/exit 0/i sed -i \"\/sundaqiang\/d\" \/etc\/opkg\/distfeeds.conf"   "${ZZZ_PATH}"
+sed -i "/exit 0/i sed -i \"\/kiddin9\/d\" \/etc\/opkg\/distfeeds.conf"      "${ZZZ_PATH}"
+
+# DIAG
+sed -i "/uci commit system/a uci commit diag"                               "${ZZZ_PATH}"
+sed -i "/uci commit diag/i uci set luci.diag.dns='jd.com'"                  "${ZZZ_PATH}"
+sed -i "/uci commit diag/i uci set luci.diag.ping='jd.com'"                 "${ZZZ_PATH}"
+sed -i "/uci commit diag/i uci set luci.diag.route='jd.com'"                "${ZZZ_PATH}"
+
+# FW
+sed -i "/uci commit luci/a uci commit firewall"                              "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.web=rule"                    "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.web.target='ACCEPT'"         "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.web.src='wan'"               "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.web.proto='tcp'"             "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.web.name='HTTP'"             "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.web.dest_port='80'"          "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ssh=rule"                    "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ssh.target='ACCEPT'"         "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ssh.src='wan'"               "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ssh.proto='tcp'"             "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ssh.dest_port='22'"          "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ssh.name='SSH'"              "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd=rule"                   "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.target='ACCEPT'"        "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.src='wan'"              "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.proto='tcp'"            "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.dest_port='7681'"       "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.name='TTYD'"            "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.enabled='1'"            "${ZZZ_PATH}"
+
+# DHCP
+sed -i 's/100/11/g' package/network/services/dnsmasq/files/dhcp.conf
+sed -i 's/150/250/g' package/network/services/dnsmasq/files/dhcp.conf
