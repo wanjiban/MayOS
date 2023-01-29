@@ -97,8 +97,7 @@ sed -i 's/"USB 打印服务器"/"打印服务"/g' `egrep "USB 打印服务器" -
 sed -i 's/"Web 管理"/"Web管理"/g' `egrep "Web 管理" -rl ./`
 sed -i 's/"管理权"/"改密码"/g' `egrep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `egrep "带宽监控" -rl ./`
-sed -i 's/"IP\/MAC 绑定"/"绑定IP"/g' `egrep "IP/MAC 绑定" -rl ./`
-sed -i 's/"IP\/DHCP/DNS"/"分配解析"/g' `egrep "DHCP/DNS" -rl ./`
+
 
 # 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间（根据编译机型变化,自行调整需要删除的固件名称）
 cat >"$CLEAR_PATH" <<-EOF
@@ -164,7 +163,7 @@ sed -i "/uci commit firewall/i uci set firewall.ttyd.src='wan'"              "${
 sed -i "/uci commit firewall/i uci set firewall.ttyd.proto='tcp'"            "${ZZZ_PATH}"
 sed -i "/uci commit firewall/i uci set firewall.ttyd.dest_port='7681'"       "${ZZZ_PATH}"
 sed -i "/uci commit firewall/i uci set firewall.ttyd.name='TTYD'"            "${ZZZ_PATH}"
-sed -i "/uci commit firewall/i uci set firewall.ttyd.enabled='0'"            "${ZZZ_PATH}"
+sed -i "/uci commit firewall/i uci set firewall.ttyd.enabled='1'"            "${ZZZ_PATH}"
 
 # DHCP
 sed -i 's/100/11/g' package/network/services/dnsmasq/files/dhcp.conf
