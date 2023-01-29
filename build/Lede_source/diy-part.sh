@@ -47,7 +47,7 @@ EOF
 
 # 把bootstrap替换成argon为源码必选主题（可自行修改您要的,主题名称必须对,比如下面代码的[argon],源码内必须有该主题,要不然编译失败）
 # sed -i "s/bootstrap/argon/ig" feeds/luci/collections/luci/Makefile
-# sed -i "s/bootstrap/argonne/ig" feeds/luci/collections/luci/Makefile
+sed -i "s/bootstrap/argonne/ig" feeds/luci/collections/luci/Makefile
 
 # 编译多主题时,设置固件默认主题（可自行修改您要的,主题名称必须对,比如下面代码的[argon],和肯定编译了该主题,要不然进不了后台）
 #sed -i "/exit 0/i\uci set luci.main.mediaurlbase='/luci-static/argon' && uci commit luci" "${FIN_PATH}"
@@ -97,6 +97,8 @@ sed -i 's/"USB 打印服务器"/"打印服务"/g' `egrep "USB 打印服务器" -
 sed -i 's/"Web 管理"/"Web管理"/g' `egrep "Web 管理" -rl ./`
 sed -i 's/"管理权"/"改密码"/g' `egrep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `egrep "带宽监控" -rl ./`
+sed -i 's/"IP\/MAC 绑定"/"绑定地址"/g' `egrep "IP/MAC 绑定" -rl ./`
+sed -i 's/"DHCP\/DNS"/"分配解析"/g' `egrep "DHCP/DNS" -rl ./`
 
 
 # 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间（根据编译机型变化,自行调整需要删除的固件名称）
