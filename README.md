@@ -1,9 +1,25 @@
+-2023年2月6号
+
+新版编译仓库：https://github.com/281677160/autobuild
+
+老版编译仓库：https://github.com/281677160/build-actions
+
+新版本地一键编译：https://github.com/281677160/bendi
+
+懒写说明了，自己摸索吧，Lienol大的源码是随缘的今天能编译明天或者就不可以了，后天又或者可以
+
+过段时间会把autobuild更新至build-actions仓库的
+
+
+---
+---
+
 
 <details>
 <summary>🆙点击查看更新说明</summary>
 <br>
 
-2022年10月22号，修复定时触发编译失败问题，修复提示nodejs.12需要升级成nodejs.16的问题
+2022年10月22号，修复定时触发启动编译失败问题，修复提示nodejs.12需要升级成nodejs.16的问题
 
 2022年10月9号，因为上游Lienol大佬删除了22.03源码，我这里也就把22.03改成他的21.02源码了，编译脚本的ubuntu也从20.04改成22.04
 
