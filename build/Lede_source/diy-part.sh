@@ -92,6 +92,8 @@ sed -i 's/"管理权"/"改密码"/g' `egrep "管理权" -rl ./`
 sed -i 's/"带宽监控"/"监控"/g' `egrep "带宽监控" -rl ./`
 sed -i 's/"Frp 内网穿透"/"Frpc"/g' `egrep "Frp 内网穿透" -rl ./`
 sed -i 's/"网络诊断"/"诊断"/g' `egrep "网络诊断" -rl ./`
+sed -i 's/"ShadowSocksR Plus+"/"SSRP"/g' `egrep "ShadowSocksR Plus+" -rl ./`
+
 
 
 # 整理固件包时候,删除您不想要的固件或者文件,让它不需要上传到Actions空间（根据编译机型变化,自行调整删除的固件名称）
